@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI } from '@google/genai';
 
@@ -8,7 +9,7 @@ interface Message {
 
 export const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hi! I'm your Strategy Advisor. Ask me about Scope 1-3 methodologies, ISO 14064 compliance, or our tiered pricing model." }
+    { role: 'assistant', content: "Expert advisor ready. I can synthesize carbon accounting logic, Indonesian regulatory nuances, and growth multiples. How shall we proceed?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,63 +30,33 @@ export const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Fixed: Strictly following GoogleGenAI initialization guidelines
+      // Fix: Create instance right before making the API call to ensure latest API key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: `
-          You are a world-class Climate Tech VC, Carbon Accounting Specialist (GHG Protocol/ISO 14064 expert), and SaaS Strategist. 
-          You are analyzing "Ecotrack Pro".
-          
-          Specific Strategy Knowledge:
-          - Pricing: SME (€499), Corporate (€2,450), Enterprise (Custom).
-          - Scopes: Scope 1 (Direct), Scope 2 (Electricity), Scope 3 (Supply Chain via Network Effect).
-          - Compliance: OJK 51 (ID), CSRD (EU), ISO 14064-1.
-          
-          Guidelines for response:
-          1. Be strategic and VC-minded (focus on ARR, LTV, Moats).
-          2. Be technically accurate about carbon accounting (referencing GHG Protocol).
-          3. Keep it brief (max 100 words per response).
-          4. If asked about pricing, defend the hybrid subscription + usage model.
-
-          The user is asking: "${userMsg}"
-        `,
-        config: {
-          temperature: 0.7,
-          maxOutputTokens: 300,
-        }
+        contents: `Analyze Ecotrack Pro. Pricing: SME (€499), Corp (€2450). Scopes 1-3. POJK 51, CSRD. User: "${userMsg}"`,
+        // Fix: Removed maxOutputTokens as it's not required and to avoid token budget issues with thinking models
+        config: { temperature: 0.7 }
       });
 
-      const aiText = response.text || "I'm sorry, I couldn't process that strategy query.";
+      const aiText = response.text || "Consultation core timed out.";
       setMessages(prev => [...prev, { role: 'assistant', content: aiText }]);
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "There was an error connecting to the strategy core." }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "Strategic core offline." }]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-800 flex flex-col h-[600px] shadow-xl overflow-hidden">
-      <div className="p-4 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white">
-            <i className="fas fa-robot text-sm"></i>
-          </div>
-          <div>
-            <p className="text-sm font-bold text-white leading-tight">Climate Strategy AI</p>
-            <p className="text-[10px] text-emerald-400 leading-tight">Online & Ready</p>
-          </div>
-        </div>
-      </div>
-
-      <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto space-y-4 scroll-smooth">
+    <div className="flex flex-col h-[500px] overflow-hidden">
+      <div className="flex-1 p-4 overflow-y-auto space-y-4 scroll-smooth">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${
+            <div className={`max-w-[90%] p-4 rounded-2xl text-xs leading-relaxed font-medium ${
               m.role === 'user' 
-                ? 'bg-emerald-600 text-white rounded-tr-none' 
-                : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                ? 'bg-indigo-600 text-white rounded-tr-none' 
+                : 'bg-white/5 text-slate-300 rounded-tl-none border border-white/10'
             }`}>
               {m.content}
             </div>
@@ -93,7 +64,7 @@ export const ChatBot: React.FC = () => {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-slate-800 p-3 rounded-2xl rounded-tl-none border border-slate-700 flex gap-2">
+            <div className="bg-white/5 p-3 rounded-2xl rounded-tl-none border border-white/10 flex gap-2">
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce"></div>
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-100"></div>
               <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-200"></div>
@@ -102,22 +73,22 @@ export const ChatBot: React.FC = () => {
         )}
       </div>
 
-      <div className="p-4 bg-slate-900 border-t border-slate-800">
-        <div className="relative">
+      <div className="p-4 pt-0">
+        <div className="relative group">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Ask about compliance, ROI, or tech..."
-            className="w-full bg-slate-800 text-white text-sm rounded-xl py-3 px-4 pr-12 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition border border-slate-700"
+            placeholder="System query..."
+            className="w-full bg-white/5 text-white text-xs rounded-xl py-3 px-4 pr-12 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition border border-white/10 group-hover:bg-white/10"
           />
           <button
             onClick={handleSend}
             disabled={isLoading}
-            className="absolute right-2 top-1.5 w-8 h-8 bg-emerald-500 text-white rounded-lg flex items-center justify-center hover:bg-emerald-600 transition disabled:opacity-50"
+            className="absolute right-2 top-1.5 w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center hover:bg-indigo-500 transition disabled:opacity-50"
           >
-            <i className="fas fa-paper-plane text-xs"></i>
+            <i className="fas fa-terminal text-[10px]"></i>
           </button>
         </div>
       </div>

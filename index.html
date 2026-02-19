@@ -1,17 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecotrack Pro | Strategic Audit</title>
+    <title>Ecotrack Pro | Forest Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@900&display=swap');
+      
+      :root {
+        --forest-deep: #020617;
+        --forest-emerald: #10b981;
+        --forest-lush: #064e3b;
+        --aura-glow: rgba(16, 185, 129, 0.12);
+      }
+
       body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--forest-deep);
+        color: #f8fafc;
+        overflow: hidden;
+      }
+
+      .forest-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 20c-5 0-10 5-10 10 0 10 15 25 15 25s15-15 15-25c0-5-5-10-10-10z' fill='%23064e3b' fill-opacity='0.03'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        opacity: 0.5;
+      }
+
+      .bioluminescent-aura {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, var(--aura-glow) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: -1;
+        filter: blur(40px);
+      }
+
+      .glass-card {
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+      }
+
+      .text-condensed {
         font-family: 'Inter', sans-serif;
-        background-color: #f8fafc;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .text-wide {
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 10px;
       }
     </style>
 <script type="importmap">
@@ -27,6 +87,9 @@
 </script>
 </head>
 <body>
+    <div class="forest-pattern"></div>
+    <div class="bioluminescent-aura" style="top: -200px; left: -200px;"></div>
+    <div class="bioluminescent-aura" style="bottom: -200px; right: -200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);"></div>
     <div id="root"></div>
 </body>
 </html>

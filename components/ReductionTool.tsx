@@ -19,7 +19,6 @@ export const ReductionTool: React.FC = () => {
   const generatePlan = async () => {
     setIsLoading(true);
     try {
-      // Fixed: Strictly following GoogleGenAI initialization guidelines
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -30,10 +29,10 @@ export const ReductionTool: React.FC = () => {
           
           Provide exactly 4 actionable recommendations in a structured JSON array format.
           Each object must have: 
-          - "title": string (A concise headline)
+          - "title": string
           - "impact": "High" | "Medium" | "Low"
-          - "timeframe": string (e.g. "6-12 months")
-          - "action": string (A detailed 2-sentence description of the strategy and expected benefit)
+          - "timeframe": string
+          - "action": string
           
           Focus on Southeast Asian context and industry best practices.
           Return ONLY the JSON array.
@@ -53,93 +52,92 @@ export const ReductionTool: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-          <i className="fas fa-sliders text-emerald-500"></i>
-          Company Profile Configuration
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-10 duration-1000">
+      <div className="glass-card p-10 rounded-[40px] border border-emerald-500/10">
+        <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-4">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+            <i className="fas fa-sliders-h"></i>
+          </div>
+          Asset Parameter Synthesis
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Sector</label>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Vertical Sector</label>
             <select 
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-black/40 border border-white/5 rounded-2xl p-4 text-sm font-bold text-white focus:ring-2 focus:ring-emerald-500 outline-none transition-all uppercase tracking-wider"
             >
-              <option>Manufacturing</option>
-              <option>Logistics</option>
-              <option>Mining</option>
-              <option>Agribusiness</option>
-              <option>Tech & Data Centers</option>
+              <option className="bg-[#020617]">Manufacturing</option>
+              <option className="bg-[#020617]">Logistics</option>
+              <option className="bg-[#020617]">Mining</option>
+              <option className="bg-[#020617]">Agribusiness</option>
+              <option className="bg-[#020617]">Tech & Data Centers</option>
             </select>
           </div>
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Scope 1 (tCO2e)</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Scope 1 (tCO2e)</label>
             <input 
               type="number" 
               value={scope1} 
               onChange={(e) => setScope1(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-black/40 border border-white/5 rounded-2xl p-4 text-sm font-black text-emerald-400 focus:ring-2 focus:ring-emerald-500 outline-none font-mono"
             />
           </div>
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Scope 2 (tCO2e)</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Scope 2 (tCO2e)</label>
             <input 
               type="number" 
               value={scope2} 
               onChange={(e) => setScope2(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-black/40 border border-white/5 rounded-2xl p-4 text-sm font-black text-indigo-400 focus:ring-2 focus:ring-indigo-500 outline-none font-mono"
             />
           </div>
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-500 uppercase">Scope 3 (tCO2e)</label>
+          <div className="space-y-2">
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Scope 3 (tCO2e)</label>
             <input 
               type="number" 
               value={scope3} 
               onChange={(e) => setScope3(Number(e.target.value))}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-black/40 border border-white/5 rounded-2xl p-4 text-sm font-black text-emerald-500 focus:ring-2 focus:ring-emerald-500 outline-none font-mono"
             />
           </div>
         </div>
         <button 
           onClick={generatePlan}
           disabled={isLoading}
-          className="mt-6 w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+          className="mt-10 w-full py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-[24px] text-xs font-black uppercase tracking-[0.3em] transition-all shadow-[0_0_40px_rgba(16,185,129,0.3)] disabled:opacity-50"
         >
-          {isLoading ? (
-            <i className="fas fa-spinner fa-spin"></i>
-          ) : (
-            <i className="fas fa-sparkles"></i>
-          )}
-          Generate Actionable Recommendations
+          {isLoading ? <i className="fas fa-spinner fa-spin"></i> : <i className="fas fa-microchip mr-2"></i>}
+          Compute Reduction Pathways
         </button>
       </div>
 
       {recommendations && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {recommendations.map((rec, i) => (
-            <div key={i} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-200 transition-colors group">
-              <div className="flex justify-between items-start mb-3">
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${
-                  rec.impact === 'High' ? 'bg-red-50 text-red-600' : 
-                  rec.impact === 'Medium' ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'
+            <div key={i} className="glass-card p-8 rounded-[32px] border border-white/5 hover:border-emerald-500/30 transition-all group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-[40px] pointer-events-none"></div>
+              <div className="flex justify-between items-start mb-6">
+                <span className={`px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+                  rec.impact === 'High' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' : 
+                  rec.impact === 'Medium' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                 }`}>
-                  {rec.impact} Impact
+                  {rec.impact} Intensity
                 </span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase">{rec.timeframe}</span>
+                <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{rec.timeframe}</span>
               </div>
-              <h4 className="text-md font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">{rec.title}</h4>
-              <p className="text-sm text-slate-600 leading-relaxed">{rec.action}</p>
+              <h4 className="text-xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors">{rec.title}</h4>
+              <p className="text-base text-slate-400 leading-relaxed font-medium italic">{rec.action}</p>
             </div>
           ))}
         </div>
       )}
       
       {!recommendations && !isLoading && (
-        <div className="bg-slate-100/50 border-2 border-dashed border-slate-200 rounded-2xl h-48 flex flex-col items-center justify-center text-slate-400">
-          <i className="fas fa-chart-line text-3xl mb-2 opacity-50"></i>
-          <p className="text-sm">Configure profile and click generate to see AI insights.</p>
+        <div className="h-64 flex flex-col items-center justify-center glass-card rounded-[40px] border-dashed border-2 border-white/5 text-slate-600">
+          <i className="fas fa-chart-network text-5xl mb-6 opacity-10"></i>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em]">Awaiting Simulation Data</p>
         </div>
       )}
     </div>

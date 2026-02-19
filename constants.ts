@@ -1,3 +1,4 @@
+
 import { AnalysisSection, SectionType } from './types';
 
 export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
@@ -19,13 +20,28 @@ export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
     ]
   },
   {
+    id: SectionType.VELOCITY,
+    title: "Environmental Velocity",
+    icon: "fa-gauge-high",
+    summary: "Real-time emission intensity tracking across direct operations, acquired assets, and external value chains.",
+    metrics: [
+      { label: "Direct Intensity", value: "0.42", color: "text-emerald-500" },
+      { label: "Chain Velocity", value: "High", color: "text-rose-500" }
+    ],
+    details: [
+      "Direct Control: Real-time monitoring of stationary combustion and process emissions per unit of production. High velocity here indicates immediate operational inefficiency.",
+      "Purchased Assets: Intensity tracking of acquired energy and utility contracts. This vector measures the 'cleanliness' of your procurement infrastructure.",
+      "External Chain: Deep-tier scope 3 intensity modeling. This is the 'drag' coefficient of your business model, representing emissions embedded in the supply chain per dollar spent.",
+      "Intensity Forecasting: Predictive models that estimate how capacity expansion will accelerate or decelerate your aggregate carbon footprint."
+    ]
+  },
+  {
     id: SectionType.SCOPES,
     title: "Advanced GHG Scopes",
     icon: "fa-diagram-project",
     summary: "Audit-grade organizational carbon inventory mapped to the Corporate Value Chain Standard.",
     metrics: [
       { label: "S3 Categories", value: "All 15", color: "text-emerald-600" },
-      // Fixed: Merged 'label2' into 'label' to match AnalysisSection interface
       { label: "Reporting (Dual S2)", value: "Supported", color: "text-blue-600" }
     ],
     details: [
@@ -33,6 +49,22 @@ export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
       "Scope 2 Methodology: Automated switch between Location-based (regional grid factors) and Market-based (contract-specific emission rates) for high-fidelity reporting.",
       "Scope 3 Depth: Comprehensive tracking for Upstream (Category 1-8) and Downstream (Category 9-15) activities, ensuring no carbon blind spots.",
       "Consolidation Approach: Flexible boundary definition supporting Financial Control, Operational Control, and Equity Share logic."
+    ]
+  },
+  {
+    id: SectionType.ESG_COMPLIANCE,
+    title: "ESG Compliance ID",
+    icon: "fa-gavel",
+    summary: "National regulatory hub for SRN PPI KLHK, IDX Carbon, and OJK 51 Reporting.",
+    metrics: [
+      { label: "Regulator Sync", value: "SRN PPI", color: "text-emerald-600" },
+      { label: "Carbon Price", value: "IDR 30k-100k", color: "text-blue-600" }
+    ],
+    details: [
+      "SRN PPI Integration: Automated generation of DRAM (Dokumen Rancangan Aksi Mitigasi) based on Scope 1-3 activity data.",
+      "NEK Calculation: Real-time tracking of Carbon Economic Value (Nilai Ekonomi Karbon) for internal tax budgeting and bursa pricing.",
+      "IDX Carbon Readiness: Seamless export of SPE-GRK (Sertifikat Pengurangan Emisi) data for listing on the Indonesia Carbon Exchange.",
+      "Audit Trail: Permanent ledger of evidence for POJK 51 sustainability reporting, drastically reducing consultant man-hours."
     ]
   },
   {

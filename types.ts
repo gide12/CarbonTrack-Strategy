@@ -17,5 +17,7 @@ export enum SectionType {
   SCALABILITY = 'scalability',
   REDUCE = 'reduce',
   PCF = 'pcf',
-  SCOPES = 'scopes'
+  SCOPES = 'scopes',
+  ESG_COMPLIANCE = 'esg_compliance',
+  VELOCITY = 'velocity'
 }
