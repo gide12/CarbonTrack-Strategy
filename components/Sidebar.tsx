@@ -33,9 +33,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSectio
 
       <div className="p-10 relative z-10">
         <div className="flex items-center gap-5 mb-14">
-          <div className="w-14 h-14 bg-emerald-600 rounded-[22px] flex items-center justify-center text-white shadow-[0_0_30px_rgba(5,150,105,0.3)] relative group cursor-pointer">
+          <div className="w-14 h-14 bg-emerald-600 rounded-[22px] flex items-center justify-center text-white shadow-[0_0_30px_rgba(5,150,105,0.3)] relative group cursor-pointer transition-transform hover:scale-105 active:scale-95">
             <div className="absolute inset-0 bg-white/20 rounded-[22px] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <i className="fas fa-fingerprint text-3xl"></i>
+            {/* Professional Leaf Icon */}
+            <i className="fas fa-leaf text-2xl transform -rotate-12"></i>
           </div>
           <div>
             <h1 className="text-xl font-black text-white tracking-tighter leading-none">ECOTRACK</h1>
