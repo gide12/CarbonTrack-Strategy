@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecotrack Pro | Forest Intelligence</title>
+    <title>CarbonINA Pro | Forest Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -63,6 +63,10 @@
         text-transform: uppercase;
       }
 
+      .text-technical {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
       ::-webkit-scrollbar {
         width: 4px;
       }
@@ -85,11 +89,13 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body>
     <div class="forest-pattern"></div>
     <div class="bioluminescent-aura" style="top: -200px; left: -200px;"></div>
     <div class="bioluminescent-aura" style="bottom: -200px; right: -200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);"></div>
     <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>

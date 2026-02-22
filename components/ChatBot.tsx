@@ -34,7 +34,7 @@ export const ChatBot: React.FC = () => {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: `Analyze Ecotrack Pro. Pricing: SME (€499), Corp (€2450). Scopes 1-3. POJK 51, CSRD. User: "${userMsg}"`,
+        contents: `Analyze CarbonINA Pro. Pricing: SME (€499), Corp (€2450). Scopes 1-3. POJK 51, CSRD. User: "${userMsg}"`,
         // Fix: Removed maxOutputTokens as it's not required and to avoid token budget issues with thinking models
         config: { temperature: 0.7 }
       });

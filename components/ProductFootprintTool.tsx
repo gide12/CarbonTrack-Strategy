@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
+import { Language } from '../types';
 
 interface LCAStage {
   stage: string;
@@ -8,10 +9,39 @@ interface LCAStage {
   description: string;
 }
 
-export const ProductFootprintTool: React.FC = () => {
+interface ProductFootprintToolProps {
+  language: Language;
+}
+
+export const ProductFootprintTool: React.FC<ProductFootprintToolProps> = ({ language }) => {
+  const t = {
+    en: {
+      title: "ISO 14067 LCA Quantifier",
+      unitSynthesis: "Unit Synthesis",
+      productDescriptor: "Product Descriptor",
+      functionalUnit: "Functional Unit",
+      economicCategory: "Economic Category",
+      execute: "Execute LCA Simulation",
+      intensityOutput: "Life Cycle Intensity Output",
+      awaiting: "Awaiting Molecular Profile",
+      categories: ["FMCG", "Electronics", "Building Materials", "Industrial Equipment", "Textiles"]
+    },
+    id: {
+      title: "Kuantifikasi LCA ISO 14067",
+      unitSynthesis: "Sintesis Unit",
+      productDescriptor: "Deskripsi Produk",
+      functionalUnit: "Unit Fungsional",
+      economicCategory: "Kategori Ekonomi",
+      execute: "Jalankan Simulasi LCA",
+      intensityOutput: "Output Intensitas Siklus Hidup",
+      awaiting: "Menunggu Profil Molekuler",
+      categories: ["FMCG", "Elektronik", "Bahan Bangunan", "Peralatan Industri", "Tekstil"]
+    }
+  }[language];
+
   const [productName, setProductName] = useState('Sustainable Packaging Box');
   const [unit, setUnit] = useState('1 unit');
-  const [category, setCategory] = useState('FMCG');
+  const [category, setCategory] = useState(t.categories[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [lcaResults, setLcaResults] = useState<LCAStage[] | null>(null);
 
@@ -50,14 +80,14 @@ export const ProductFootprintTool: React.FC = () => {
             <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 border border-emerald-500/20">
               <i className="fas fa-box-open"></i>
             </div>
-            ISO 14067 LCA Quantifier
+            {t.title}
           </h3>
-          <span className="text-[10px] font-black bg-emerald-500/10 text-emerald-500 px-4 py-2 rounded-full uppercase tracking-widest border border-emerald-500/20">Unit Synthesis</span>
+          <span className="text-[10px] font-black bg-emerald-500/10 text-emerald-500 px-4 py-2 rounded-full uppercase tracking-widest border border-emerald-500/20">{t.unitSynthesis}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Product Descriptor</label>
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t.productDescriptor}</label>
             <input 
               type="text" 
               value={productName} 
@@ -67,7 +97,7 @@ export const ProductFootprintTool: React.FC = () => {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Functional Unit</label>
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t.functionalUnit}</label>
             <input 
               type="text" 
               value={unit} 
@@ -77,17 +107,15 @@ export const ProductFootprintTool: React.FC = () => {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Economic Category</label>
+            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{t.economicCategory}</label>
             <select 
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className="w-full bg-black/40 border border-white/5 rounded-2xl p-4 text-sm font-bold text-white focus:ring-2 focus:ring-emerald-500 outline-none uppercase tracking-widest"
             >
-              <option className="bg-[#020617]">FMCG</option>
-              <option className="bg-[#020617]">Electronics</option>
-              <option className="bg-[#020617]">Building Materials</option>
-              <option className="bg-[#020617]">Industrial Equipment</option>
-              <option className="bg-[#020617]">Textiles</option>
+              {t.categories.map(c => (
+                <option key={c} value={c} className="bg-[#020617]">{c}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -98,7 +126,7 @@ export const ProductFootprintTool: React.FC = () => {
           className="mt-10 w-full py-5 bg-slate-900 hover:bg-black text-white rounded-[24px] text-xs font-black uppercase tracking-[0.3em] transition-all border border-white/5 shadow-2xl disabled:opacity-50"
         >
           {isLoading ? <i className="fas fa-sync fa-spin"></i> : <i className="fas fa-atom mr-2"></i>}
-          Execute LCA Simulation
+          {t.execute}
         </button>
       </div>
 
@@ -107,7 +135,7 @@ export const ProductFootprintTool: React.FC = () => {
           <div className="bg-gradient-to-r from-emerald-600 to-emerald-900 p-12 rounded-[48px] text-white shadow-[0_20px_60px_-15px_rgba(5,150,105,0.4)] flex items-center justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] rounded-full pointer-events-none"></div>
             <div className="relative z-10">
-              <p className="text-emerald-100 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Life Cycle Intensity Output</p>
+              <p className="text-emerald-100 text-[10px] font-black uppercase tracking-[0.4em] mb-4">{t.intensityOutput}</p>
               <h2 className="text-6xl font-black text-technical tracking-tighter">{totalEmissions} <span className="text-2xl font-light opacity-60">kgCO2e / {unit}</span></h2>
             </div>
             <div className="w-24 h-24 bg-white/20 rounded-[32px] flex items-center justify-center border border-white/10 backdrop-blur-lg relative z-10">
@@ -146,7 +174,7 @@ export const ProductFootprintTool: React.FC = () => {
       {!lcaResults && !isLoading && (
         <div className="h-64 flex flex-col items-center justify-center glass-card rounded-[40px] border-dashed border-2 border-white/5 text-slate-600">
           <i className="fas fa-box-open text-5xl mb-6 opacity-10"></i>
-          <p className="text-[10px] font-black uppercase tracking-[0.4em]">Awaiting Molecular Profile</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em]">{t.awaiting}</p>
         </div>
       )}
     </div>

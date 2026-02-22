@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
+import { Language } from '../types';
 
 interface ScopeCategory {
   name: string;
@@ -16,8 +17,39 @@ const COLORS = {
   scope3: '#10b981',
 };
 
-export const GHGAdvancedTracker: React.FC = () => {
-  const [sector, setSector] = useState('Oil & Gas');
+interface GHGAdvancedTrackerProps {
+  language: Language;
+}
+
+export const GHGAdvancedTracker: React.FC<GHGAdvancedTrackerProps> = ({ language }) => {
+  const t = {
+    en: {
+      title: "Carbon Accounting Engine",
+      subtitle: "GHG Protocol // ISO 14064-1 // ISO 14067",
+      runAnalysis: "Run Analysis",
+      total: "Total",
+      categoryVector: "Category Vector",
+      scope: "Scope",
+      value: "Value (tCO2e)",
+      accuracy: "Accuracy",
+      ready: "Ready for data ingestion",
+      sectors: ["Oil & Gas", "Automotive", "FMCG Retail", "Cement Industry"]
+    },
+    id: {
+      title: "Mesin Akuntansi Karbon",
+      subtitle: "Protokol GRK // ISO 14064-1 // ISO 14067",
+      runAnalysis: "Jalankan Analisis",
+      total: "Total",
+      categoryVector: "Vektor Kategori",
+      scope: "Cakupan",
+      value: "Nilai (tCO2e)",
+      accuracy: "Akurasi",
+      ready: "Siap untuk pengambilan data",
+      sectors: ["Minyak & Gas", "Otomotif", "Ritel FMCG", "Industri Semen"]
+    }
+  }[language];
+
+  const [sector, setSector] = useState(t.sectors[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<ScopeCategory[] | null>(null);
 
@@ -52,41 +84,40 @@ export const GHGAdvancedTracker: React.FC = () => {
   ] : [];
 
   return (
-    <div className="glass-panel rounded-3xl overflow-hidden p-8 animate-in fade-in duration-1000">
+    <div className="glass-card rounded-3xl overflow-hidden p-8 animate-in fade-in duration-1000">
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-indigo-400 border border-white/10 shadow-inner">
             <i className="fas fa-microscope text-xl"></i>
           </div>
           <div>
-            <h3 className="text-xl font-black text-white tracking-tight">Advanced Inventory Ledger</h3>
-            <p className="text-slate-500 font-bold text-[10px] uppercase tracking-widest">Standardized GHG Reporting Frame</p>
+            <h3 className="text-xl font-black text-white tracking-tight">{t.title}</h3>
+            <p className="text-slate-500 font-bold text-[10px] uppercase tracking-widest">{t.subtitle}</p>
           </div>
         </div>
         <div className="flex gap-3">
           <select 
             value={sector}
             onChange={(e) => setSector(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold text-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold text-white focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
           >
-            <option className="bg-slate-900">Oil & Gas</option>
-            <option className="bg-slate-900">Automotive</option>
-            <option className="bg-slate-900">FMCG Retail</option>
-            <option className="bg-slate-900">Cement Industry</option>
+            {t.sectors.map(s => (
+              <option key={s} value={s} className="bg-slate-900">{s}</option>
+            ))}
           </select>
           <button 
             onClick={analyzeInventory}
             disabled={isLoading}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50"
           >
-            {isLoading ? <i className="fas fa-sync fa-spin"></i> : 'Run Analysis'}
+            {isLoading ? <i className="fas fa-sync fa-spin"></i> : t.runAnalysis}
           </button>
         </div>
       </div>
 
       {data ? (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-4 flex flex-col items-center justify-center py-6 glass-panel rounded-3xl border-white/5">
+          <div className="lg:col-span-4 flex flex-col items-center justify-center py-6 glass-card rounded-3xl border-white/5">
             <div className="h-64 w-full relative">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -108,7 +139,7 @@ export const GHGAdvancedTracker: React.FC = () => {
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Total</span>
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">{t.total}</span>
                 <span className="text-2xl font-black text-white text-technical">
                   {(scopeData.reduce((acc, s) => acc + s.value, 0) / 1000).toFixed(1)}k
                 </span>
@@ -125,15 +156,15 @@ export const GHGAdvancedTracker: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-8 overflow-hidden glass-panel rounded-3xl border-white/5">
-            <div className="max-h-[350px] overflow-y-auto">
+          <div className="lg:col-span-8 overflow-hidden glass-card rounded-3xl border-white/5">
+            <div className="max-h-[350px] overflow-auto">
               <table className="w-full text-left text-sm border-collapse">
                 <thead className="sticky top-0 bg-slate-900 border-b border-white/5 text-slate-500 uppercase text-[9px] font-black tracking-widest z-10">
                   <tr>
-                    <th className="px-6 py-4">Category Vector</th>
-                    <th className="px-6 py-4">Scope</th>
-                    <th className="px-6 py-4 text-right">Value (tCO2e)</th>
-                    <th className="px-6 py-4">Accuracy</th>
+                    <th className="px-6 py-4">{t.categoryVector}</th>
+                    <th className="px-6 py-4">{t.scope}</th>
+                    <th className="px-6 py-4 text-right">{t.value}</th>
+                    <th className="px-6 py-4">{t.accuracy}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
@@ -172,9 +203,9 @@ export const GHGAdvancedTracker: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="h-80 flex flex-col items-center justify-center glass-panel rounded-3xl border-white/5 border-dashed border-2 text-slate-500">
+        <div className="h-80 flex flex-col items-center justify-center glass-card rounded-3xl border-white/5 border-dashed border-2 text-slate-500">
           <i className="fas fa-radar text-5xl mb-6 opacity-10 animate-pulse"></i>
-          <p className="text-sm font-bold uppercase tracking-widest opacity-40">Ready for data ingestion</p>
+          <p className="text-sm font-bold uppercase tracking-widest opacity-40">{t.ready}</p>
         </div>
       )}
     </div>

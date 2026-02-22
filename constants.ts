@@ -3,6 +3,150 @@ import { AnalysisSection, SectionType } from './types';
 
 export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
   {
+    id: SectionType.REGISTRY,
+    title: "National Carbon Registry Layer",
+    icon: "fa-database",
+    summary: "Centralized monitoring system for national emission tracking and sector-wide heatmaps.",
+    metrics: [
+      { label: "Monitored Entities", value: "4,250", color: "text-indigo-500" },
+      { label: "Data Fidelity", value: "99.8%", color: "text-emerald-500" }
+    ],
+    details: [
+      "National Emission Monitoring: Real-time aggregation of Scope 1 & 2 data from all registered industrial entities.",
+      "Sector Heatmap: Visual intelligence identifying high-intensity geographical and industrial clusters.",
+      "Policy Impact Simulation: Modeling the macro-effect of regulatory changes on national NDC targets.",
+      "Tax Estimation: Automated calculation of projected national carbon tax revenue based on current emission trajectories."
+    ]
+  },
+  {
+    id: SectionType.REGULATOR_TOOLS,
+    title: "Regulator Tools",
+    icon: "fa-gavel",
+    summary: "Advanced oversight tools for verifier management and MRV integrity.",
+    metrics: [
+      { label: "Active Verifiers", value: "84", color: "text-blue-500" },
+      { label: "Fraud Alerts", value: "2 Active", color: "text-rose-500" }
+    ],
+    details: [
+      "Approve Verifier: Streamlined portal for certifying and auditing third-party verification bodies.",
+      "Detect Fraud MRV: AI-powered anomaly detection to identify inconsistencies in Monitoring, Reporting, and Verification data.",
+      "Emission Trajectory: Predictive modeling of national emission trends to ensure alignment with international climate commitments.",
+      "Audit Trail: Immutable ledger of all regulatory actions and entity submissions for complete transparency."
+    ]
+  },
+  {
+    id: SectionType.POLICY_SIM,
+    title: "AI Policy Simulation",
+    icon: "fa-vial-circle-check",
+    summary: "B2G killer feature for simulating the impact of legislative decisions on industry and environment.",
+    metrics: [
+      { label: "Sim Accuracy", value: "94.2%", color: "text-emerald-400" },
+      { label: "Scenarios", value: "Unlimited", color: "text-indigo-400" }
+    ],
+    details: [
+      "Carbon Tax Impact: Simulate how increasing carbon tax rates will affect specific industrial sectors and national GDP.",
+      "EV Subsidy Modeling: Predict the emission reduction curve resulting from various electric vehicle incentive structures.",
+      "Industrial Shift: Forecast how policy changes will drive capital migration between high-carbon and low-carbon technologies.",
+      "Strategic Advantage: Provides data-backed evidence for legislative proposals, making the platform indispensable for policy makers."
+    ]
+  },
+  {
+    id: SectionType.PRICE_PREDICTION,
+    title: "AI Carbon Price Prediction",
+    icon: "fa-chart-line",
+    summary: "Market intelligence for regional carbon pricing and demand forecasting.",
+    metrics: [
+      { label: "Price Forecast", value: "IDR 42k", color: "text-emerald-500" },
+      { label: "Market Balance", value: "Tight", color: "text-amber-500" }
+    ],
+    details: [
+      "Regional Price Prediction: Forecasting carbon credit prices across Southeast Asian markets based on supply/demand dynamics.",
+      "Offset Demand: Modeling the future appetite for carbon offsets from domestic and international corporate buyers.",
+      "Market Imbalance: Identifying projected shortages or surpluses in specific credit types (e.g., NBS vs Tech-based).",
+      "Economic Stability: Assisting regulators in maintaining market stability through informed intervention strategies."
+    ]
+  },
+  {
+    id: SectionType.ACCOUNTING,
+    title: "Carbon Accounting Engine",
+    icon: "fa-calculator",
+    summary: "High-precision emission quantification engine aligned with global standards.",
+    metrics: [
+      { label: "Standard", value: "GHG Protocol", color: "text-emerald-500" },
+      { label: "ISO Compliance", value: "14064-1 / 14067", color: "text-blue-500" }
+    ],
+    details: [
+      "Full Scope 1, 2, and 3 tracking with automated data ingestion from ERP and utility sources.",
+      "ISO 14064-1: Organizational level greenhouse gas quantification and reporting.",
+      "ISO 14067: Product Carbon Footprint (PCF) quantification for life cycle assessment (LCA).",
+      "Dynamic emission factor library with regional overrides for Indonesian grid intensity."
+    ]
+  },
+  {
+    id: SectionType.CALCULATOR,
+    title: "GHG Protocol Calculator",
+    icon: "fa-calculator",
+    summary: "Interactive quantification tool for direct and indirect emissions aligned with international standards.",
+    metrics: [
+      { label: "Methodology", value: "GHG Protocol", color: "text-emerald-500" },
+      { label: "GWP Standard", value: "IPCC AR6", color: "text-blue-500" }
+    ],
+    details: [
+      "Scope 1: Direct emissions from owned or controlled sources (fuel combustion, refrigerants).",
+      "Scope 2: Indirect emissions from the generation of purchased energy (electricity, steam, heating).",
+      "Scope 3: All other indirect emissions that occur in the value chain (travel, waste, procurement).",
+      "Audit Readiness: Generates evidence-backed reports for ISO 14064-1 verification."
+    ]
+  },
+  {
+    id: SectionType.COMPLIANCE,
+    title: "ESG Compliance Manager",
+    icon: "fa-file-shield",
+    summary: "Unified regulatory hub for global and national sustainability reporting.",
+    metrics: [
+      { label: "Global", value: "CSRD / TCFD", color: "text-indigo-500" },
+      { label: "National", value: "SRN PPI / NEK", color: "text-amber-500" }
+    ],
+    details: [
+      "Global Alignment: Native support for EU CSRD, ISSB IFRS-S2, and TCFD disclosure frameworks.",
+      "Indonesian Regulation: Direct integration with SRN PPI KLHK and Nilai Ekonomi Karbon (NEK) tracking.",
+      "Bursa Karbon: Audit-ready data exports for IDX Carbon listing and SPE-GRK verification.",
+      "Outputs: Automated ESG Reports, audit-ready evidence files, and direct regulator submission portals."
+    ]
+  },
+  {
+    id: SectionType.REDUCTION,
+    title: "Carbon Reduction Planner",
+    icon: "fa-brain",
+    summary: "AI-driven decarbonization pathways and financial impact modeling.",
+    metrics: [
+      { label: "AI Confidence", value: "96%", color: "text-emerald-400" },
+      { label: "ROI Forecast", value: "Active", color: "text-blue-400" }
+    ],
+    details: [
+      "Smart Recommendations: AI-generated emission reduction strategies based on operational hotspots.",
+      "Tax Prediction: Predictive modeling for carbon tax liabilities under evolving Indonesian frameworks.",
+      "Renewable ROI: Financial feasibility analysis for solar adoption and energy efficiency upgrades.",
+      "Supply Chain Optimization: Logistics and procurement modeling to minimize Scope 3 intensity."
+    ]
+  },
+  {
+    id: SectionType.WALLET,
+    title: "Carbon Asset Wallet",
+    icon: "fa-wallet",
+    summary: "Strategic management of carbon credits and environmental assets.",
+    metrics: [
+      { label: "Credit Balance", value: "12,450 tCO2e", color: "text-emerald-500" },
+      { label: "Asset Value", value: "€186k", color: "text-indigo-500" }
+    ],
+    details: [
+      "Secure Storage: Centralized repository for verified carbon credits (SPE-GRK, VCU, etc.).",
+      "Offset Tracking: Real-time monitoring of retirement status and vintage verification.",
+      "Financial Valuation: Live tracking of carbon asset market value for balance sheet reporting.",
+      "Transaction Ledger: Immutable history of credit acquisitions and retirements for audit transparency."
+    ]
+  },
+  {
     id: SectionType.FIT,
     title: "Product & Climate Fit",
     icon: "fa-leaf",
@@ -126,7 +270,7 @@ export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
       { label: "Price/Value", value: "Optimal", color: "text-blue-600" }
     ],
     details: [
-      "Vs Watershed/Perspectives: Ecotrack Pro wins on localized emission factor databases (PLN Grid intensity, regional fuel types) and lower implementation costs for SMEs.",
+      "Vs Watershed/Perspectives: CarbonINA Pro wins on localized emission factor databases (PLN Grid intensity, regional fuel types) and lower implementation costs for SMEs.",
       "Strategic Niche: The 'Carbon Compliance Gateway' for Indonesian conglomerates needing to report to both local OJK and international stakeholders.",
       "Supply Chain Focus: Leveraging the Indonesian manufacturing base to create a dense network of primary supplier data that global tools lack access to."
     ]
@@ -145,7 +289,7 @@ export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
       "Corporate Tier (€2,450/mo): Full Scope 1-3 (limited categories), API/ERP integration (SAP/Oracle), CSRD/OJK dashboards, 5 user seats. Usage-based: €0.10 per transaction beyond 5k.",
       "Enterprise Tier (€8,000+ custom): Unlimited entities, Supplier Portal (Network Effect), dedicated Sustainability Success Manager, SSO, and White-labeling options.",
       "Premium Add-ons: AI Decarbonization Planner (€600/mo add-on) for scenario modeling, and 'One-Click Audit Export' (€2,000 one-off) which generates auditor-formatted PDF/XBRL packs.",
-      "Consulting Upsell: Partnership with local ESG boutique firms for 'Software-Led Consulting' where Ecotrack Pro takes a 20% platform fee."
+      "Consulting Upsell: Partnership with local ESG boutique firms for 'Software-Led Consulting' where CarbonINA Pro takes a 20% platform fee."
     ]
   },
   {
@@ -160,7 +304,7 @@ export const INITIAL_ANALYSIS_DATA: AnalysisSection[] = [
     details: [
       "National Registry (SRN PPI): Future-proofed to push verified emissions data directly to government databases for Carbon Tax credit verification.",
       "Green Deal Alignment: Supports the JETP (Just Energy Transition Partnership) by providing transparency to coal-reliant industries transitioning to renewables.",
-      "Partnership Strategy: Collaborate with Mandiri/BCA to offer 'Green Loans' to clients who maintain high data quality scores on Ecotrack Pro.",
+      "Partnership Strategy: Collaborate with Mandiri/BCA to offer 'Green Loans' to clients who maintain high data quality scores on CarbonINA Pro.",
       "SEA Expansion: Using Indonesia as a laboratory for the Vietnam and Thailand manufacturing corridors."
     ]
   },

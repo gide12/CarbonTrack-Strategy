@@ -9,6 +9,20 @@ export interface AnalysisSection {
 }
 
 export enum SectionType {
+  // Company Persona Sections
+  ACCOUNTING = 'accounting',
+  CALCULATOR = 'calculator',
+  COMPLIANCE = 'compliance',
+  REDUCTION = 'reduction',
+  WALLET = 'wallet',
+  
+  // Government Persona Sections
+  REGISTRY = 'registry',
+  REGULATOR_TOOLS = 'regulator_tools',
+  POLICY_SIM = 'policy_sim',
+  PRICE_PREDICTION = 'price_prediction',
+  
+  // Legacy/Other Sections
   FIT = 'fit',
   TECHNICAL = 'technical',
   COMPETITIVE = 'competitive',
@@ -20,4 +34,15 @@ export enum SectionType {
   SCOPES = 'scopes',
   ESG_COMPLIANCE = 'esg_compliance',
   VELOCITY = 'velocity'
+}
+
+export enum UserPersona {
+  COMPANY = 'company',
+  GOVERNMENT = 'government',
+  NONE = 'none'
+}
+
+export enum Language {
+  EN = 'en',
+  ID = 'id'
 }

@@ -68,11 +68,11 @@ export const ESGComplianceManager: React.FC = () => {
               <i className="fas fa-landmark text-2xl"></i>
             </div>
             <div>
-              <h3 className="text-3xl font-black text-white tracking-tighter">Regulatory Nexus</h3>
+              <h3 className="text-3xl font-black text-white tracking-tighter">ESG Compliance Manager</h3>
               <div className="flex items-center gap-4 mt-1">
-                 <span className="text-[10px] font-black text-emerald-500 tracking-widest uppercase">ID: KLHK-SRN-PPI</span>
+                 <span className="text-[10px] font-black text-emerald-500 tracking-widest uppercase">Global: CSRD // ISSB // TCFD</span>
                  <div className="h-1 w-1 bg-slate-700 rounded-full"></div>
-                 <span className="text-[10px] font-black text-indigo-400 tracking-widest uppercase">IDX Carbon Bursa</span>
+                 <span className="text-[10px] font-black text-indigo-400 tracking-widest uppercase">National: SRN PPI // NEK // IDX</span>
               </div>
             </div>
           </div>
